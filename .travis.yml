@@ -7,10 +7,9 @@ services:
 
 before_script:
 - sh -c "mkdir $TRAVIS_BUILD_DIR/HXE"
-- sh -c "chown 12000:79 $TRAVIS_BUILD_DIR/HXE"
+- sh -c "chmod -R 777 $TRAVIS_BUILD_DIR/HXE"
 - sh -c "echo '{\"master_password\" : \"L1qu1base_test\"}' > $TRAVIS_BUILD_DIR/HXE/password.json"
-- sh -c "chmod 600 $TRAVIS_BUILD_DIR/HXE/password.json"
-- sh -c "chown 12000:79 $TRAVIS_BUILD_DIR/HXE/password.json"
+- sh -c "chmod 777 $TRAVIS_BUILD_DIR/HXE/password.json"
 - docker pull store/saplabs/hanaexpress:2.00.036.00.20190223.1
 - docker run -p 39013:39013 -p 39015:39015 -p 39017:39017 -p 39041-39045:39041-39045 -p 1128-1129:1128-1129 -p 59013-59014:59013-59014 -v $TRAVIS_BUILD_DIR/HXE:/hana/mounts --ulimit nofile=1048576:1048576 --sysctl kernel.shmmax=1073741824 --sysctl net.ipv4.ip_local_port_range='40000 60999' --sysctl kernel.shmmni=524288 --sysctl kernel.shmall=8388608 --name HXETravisCI store/saplabs/hanaexpress:2.00.036.00.20190223.1 --passwords-url file:///hana/mounts/passwords.json --agree-to-sap-license
 - docker ps -a
