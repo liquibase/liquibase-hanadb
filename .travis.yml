@@ -8,7 +8,7 @@ services:
 env:
   global:
     - HXE_VERSION=2.00.036.00.20190223.1
-    - PASSWORD_FILE_CONTENT="{\"master_password\" : \"L1qu1base_test\"}"
+    - PASSWORD_FILE_CONTENT='{"master_password" : "L1qu1base_test"}'
     - PASSWORD_FILE_NAME=passwords.json
 
 before_script:
