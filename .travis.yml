@@ -23,9 +23,9 @@ before_script:
   - sleep 10
   - |-
     while true; do 
-      STARTING_CONTAINERS=`docker ps -a --filter 'name=HXETravisCI' --filter 'health=starting' | grep HXETravisCI | wc -l`;
+      STARTING_CONTAINERS=`docker ps --filter "name=HXETravisCI" --filter "health=starting" --format "{{.Names}}" | wc -l`;
       echo $STARTING_CONTAINERS;
-      if [ $STARTING_CONTAINERS -ne 1 ]; then
+      if [ $STARTING_CONTAINERS -ne 2 ]; then
         break; 
       fi;
       sleep 1; 
