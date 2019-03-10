@@ -23,6 +23,7 @@ before_script:
   - sleep 10
   - while true; do 
       STARTING_CONTAINERS=$(docker ps --filter status=running --filter name=HXETravisCI --filter health=starting | grep HXETravisCI | wc -l);
+      echo $STARTING_CONTAINERS;
       if [ $STARTING_CONTAINERS -ne 1 ]; then
         break; 
       fi;
