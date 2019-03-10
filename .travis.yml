@@ -25,7 +25,7 @@ before_script:
       STARTING_CONTAINERS=$(docker ps --filter status=running --filter name=HXETravisCI --filter health=starting | grep HXETravisCI | wc -l);
       if [ $STARTING_CONTAINERS -ne 1 ]; then
         break; 
-      fi 
+      fi;
       sleep 1; 
     done
   - docker ps -a
