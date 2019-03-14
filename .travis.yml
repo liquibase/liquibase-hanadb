@@ -21,11 +21,12 @@ before_script:
   - docker pull store/saplabs/hanaexpress:$HXE_VERSION
   - docker run -d -p 39013:39013 -p 39015:39015 -p 39017:39017 -p 39041-39045:39041-39045 -p 1128-1129:1128-1129 -p 59013-59014:59013-59014 -v $TRAVIS_BUILD_DIR/HXE:/hana/mounts --ulimit nofile=1048576:1048576 --sysctl kernel.shmmax=1073741824 --sysctl net.ipv4.ip_local_port_range='40000 60999' --sysctl kernel.shmmni=524288 --sysctl kernel.shmall=8388608 --name HXETravisCI store/saplabs/hanaexpress:$HXE_VERSION --passwords-url file:///hana/mounts/$PASSWORD_FILE_NAME --agree-to-sap-license
   - sleep 10
+  - docker ps --filter "name=HXETravisCI" --filter "health=starting" --format "{{.Names}}"
   - |-
     while true; do 
       STARTING_CONTAINERS=`docker ps --filter "name=HXETravisCI" --filter "health=starting" --format "{{.Names}}" | wc -l`;
       echo $STARTING_CONTAINERS;
-      if [ $STARTING_CONTAINERS -ne 2 ]; then
+      if [ $STARTING_CONTAINERS -ne 1 ]; then
         break; 
       fi;
       sleep 1; 
