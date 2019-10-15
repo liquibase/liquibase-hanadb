@@ -7,7 +7,8 @@ import liquibase.datatype.LiquibaseDataType;
 import liquibase.datatype.core.ClobType;
 import liquibase.ext.hana.HanaDatabase;
 
-@DataTypeInfo(name = "nclob", aliases = { "longnvarchar", "ntext", "java.sql.Types.LONGNVARCHAR",
+@DataTypeInfo(name = "nclob", aliases = { "longnvarchar", "ntext",
+        "java.sql.Types.LONGNVARCHAR",
         "java.sql.Types.NCLOB" }, minParameters = 0, maxParameters = 0, priority = LiquibaseDataType.PRIORITY_DATABASE)
 public class NClobTypeHana extends ClobType {
 
