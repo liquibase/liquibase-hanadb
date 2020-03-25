@@ -77,13 +77,13 @@ If you want to use the Liquibase HANA extension in an application project, add t
 <dependency>
     <groupId>com.sap.foss.hana</groupId>
     <artifactId>liquibase-hana</artifactId>
-    <version>1.0.1-SNAPSHOT</version>
+    <version>1.0.1</version>
 </dependency>
 ```
 
 ### Gradle
 ```
-implementation 'com.sap.foss.hana:liquibase-hana:1.0.1-SNAPSHOT'
+implementation 'com.sap.foss.hana:liquibase-hana:1.0.1'
 ```
 
 # How to obtain support
