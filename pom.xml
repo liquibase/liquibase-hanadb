@@ -6,7 +6,7 @@
 
 	<groupId>com.sap.foss.hana</groupId>
 	<artifactId>liquibase-hana</artifactId>
-	<version>1.0.1</version>
+	<version>1.0.2-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
 	<name>SAP HANA Liquibase Extension</name>
