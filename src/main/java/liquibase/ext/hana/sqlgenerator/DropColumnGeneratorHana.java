@@ -11,7 +11,6 @@ import liquibase.sqlgenerator.SqlGeneratorChain;
 import liquibase.sqlgenerator.core.DropColumnGenerator;
 import liquibase.statement.core.DropColumnStatement;
 import liquibase.structure.core.Column;
-import liquibase.structure.core.Table;
 
 public class DropColumnGeneratorHana extends DropColumnGenerator {
 	@Override
@@ -21,15 +20,6 @@ public class DropColumnGeneratorHana extends DropColumnGenerator {
 
 	@Override
 	public boolean supports(DropColumnStatement statement, Database database) {
-		if (statement.isMultiple()) {
-			String tableName = null;
-			for (DropColumnStatement s : statement.getColumns()) {
-				if (tableName != null && !database.correctObjectName(tableName, Table.class).equals(database.correctObjectName(s.getTableName(), Table.class))) {
-					return false;
-				}
-				tableName = s.getTableName();
-			}
-		}
 		return database instanceof HanaDatabase;
 	}
 

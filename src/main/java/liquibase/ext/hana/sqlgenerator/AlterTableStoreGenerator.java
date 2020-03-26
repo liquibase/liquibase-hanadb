@@ -21,6 +21,9 @@ public class AlterTableStoreGenerator extends AbstractSqlGenerator<AlterTableSto
         ValidationErrors validationErrors = new ValidationErrors();
         validationErrors.checkRequiredField("tableName", statement.getTableName());
         validationErrors.checkRequiredField("tableStore", statement.getTableStore());
+        if (!"ROW".equalsIgnoreCase(statement.getTableStore()) && !"COLUMN".equalsIgnoreCase(statement.getTableStore())) {
+        	validationErrors.addError("The table store must be either 'ROW' or 'COLUMN'");
+        }
         return validationErrors;
     }
 

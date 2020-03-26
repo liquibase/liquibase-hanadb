@@ -23,6 +23,7 @@ public class DropColumnGeneratorHanaTest {
 		final DropColumnStatement statement = new DropColumnStatement("", "", "TABLE", "COLUMN1");
 		DataTypeFactory.getInstance().register(IntTypeHana.class);
 		assertTrue(generator.supports(statement, database));
+		assertFalse(generator.validate(statement, database, null).hasErrors());
 		final Sql[] sql = generator.generateSql(statement, database, null);
 		assertEquals(1, sql.length);
 		assertEquals("ALTER TABLE TABLE DROP (COLUMN1)", sql[0].toSql());
@@ -36,6 +37,7 @@ public class DropColumnGeneratorHanaTest {
 				Arrays.asList(new DropColumnStatement[] { statement1, statement2 }));
 		DataTypeFactory.getInstance().register(IntTypeHana.class);
 		assertTrue(generator.supports(statement, database));
+		assertFalse(generator.validate(statement, database, null).hasErrors());
 		final Sql[] sql = generator.generateSql(statement, database, null);
 		assertEquals(1, sql.length);
 		assertEquals("ALTER TABLE TABLE DROP (COLUMN1,COLUMN2)", sql[0].toSql());
@@ -48,17 +50,19 @@ public class DropColumnGeneratorHanaTest {
 		final DropColumnStatement statement = new DropColumnStatement(
 				Arrays.asList(new DropColumnStatement[] { statement1, statement2 }));
 		DataTypeFactory.getInstance().register(IntTypeHana.class);
-		assertFalse(generator.supports(statement, database));
+		assertTrue(generator.supports(statement, database));
+		assertTrue(generator.validate(statement, database, null).hasErrors());
 	}
 	
 	@Test
 	public void testDropMultipleColumnsSameTableDifferentCase() {
 		final DropColumnStatement statement1 = new DropColumnStatement("", "", "TABLE", "COLUMN1");
-		final DropColumnStatement statement2 = new DropColumnStatement("", "", "table", "COLUMN2");
+		final DropColumnStatement statement2 = new DropColumnStatement("", "", "TABLE", "COLUMN2");
 		final DropColumnStatement statement = new DropColumnStatement(
 				Arrays.asList(new DropColumnStatement[] { statement1, statement2 }));
 		DataTypeFactory.getInstance().register(IntTypeHana.class);
 		assertTrue(generator.supports(statement, database));
+		assertFalse(generator.validate(statement, database, null).hasErrors());
 		final Sql[] sql = generator.generateSql(statement, database, null);
 		assertEquals(1, sql.length);
 		assertEquals("ALTER TABLE TABLE DROP (COLUMN1,COLUMN2)", sql[0].toSql());
