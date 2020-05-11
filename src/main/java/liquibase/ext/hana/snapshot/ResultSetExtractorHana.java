@@ -11,7 +11,6 @@ import liquibase.snapshot.CachedRow;
 import liquibase.snapshot.DatabaseSnapshot;
 import liquibase.snapshot.JdbcDatabaseSnapshot;
 import liquibase.snapshot.ResultSetCacheHana;
-import liquibase.snapshot.ResultSetCacheHana.RowData;
 import liquibase.snapshot.ResultSetCacheHana.SingleResultSetExtractor;
 import liquibase.structure.core.Schema;
 
