@@ -5,11 +5,16 @@ import liquibase.datatype.DataTypeInfo;
 import liquibase.datatype.DatabaseDataType;
 import liquibase.datatype.LiquibaseDataType;
 import liquibase.datatype.core.ClobType;
+import liquibase.exception.DatabaseException;
 import liquibase.ext.hana.HanaDatabase;
+import liquibase.logging.LogService;
+import liquibase.logging.Logger;
 
 @DataTypeInfo(name = "clob", aliases = { "longvarchar", "java.sql.Types.LONGVARCHAR",
 		"java.sql.Types.CLOB" }, minParameters = 0, maxParameters = 0, priority = LiquibaseDataType.PRIORITY_DATABASE)
 public class ClobTypeHana extends ClobType {
+
+	private static final Logger LOG = LogService.getLog( ClobTypeHana.class );
 
 	@Override
 	public int getPriority() {
@@ -23,6 +28,14 @@ public class ClobTypeHana extends ClobType {
 
 	@Override
 	public DatabaseDataType toDatabaseDataType(Database database) {
-		return new DatabaseDataType("CLOB");
+		try {
+			if ( database.getDatabaseMajorVersion() >= 4 ) {
+				return new DatabaseDataType( "NCLOB" );
+			}
+		}
+		catch (DatabaseException e) {
+			LOG.warning( "Unable to determine the database version.", e );
+		}
+		return new DatabaseDataType( "CLOB" );
 	}
 }
