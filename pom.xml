@@ -57,7 +57,7 @@
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<liquibase.version>3.6.3</liquibase.version>
+		<liquibase.version>3.8.9</liquibase.version>
 	</properties>
 
 	<dependencies>
