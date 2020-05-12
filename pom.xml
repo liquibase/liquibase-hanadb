@@ -11,11 +11,11 @@
 
 	<name>SAP HANA Liquibase Extension</name>
 	<description>Liquibase extension for SAP HANA</description>
-	<url>https://github.com/SAP/hana-liquibase</url>
+	<url>https://github.com/liquibase/liquibase-hana</url>
 
 	<organization>
-		<name>SAP</name>
-		<url>http://www.sap.com</url>
+		<name>Liquibase</name>
+		<url>http://www.liquibase.org</url>
 	</organization>
 
 	<licenses>
@@ -26,15 +26,22 @@
 	</licenses>
 
 	<issueManagement>
-		<url>https://github.com/SAP/hana-liquibase/issues</url>
+		<url>https://github.com/liquibase/liquibase-hana/issues</url>
 	</issueManagement>
 
 	<scm>
-		<connection>https://github.com/SAP/hana-liquibase.git</connection>
-		<url>https://github.com/SAP/hana-liquibase</url>
+		<connection>https://github.com/liquibase/liquibase-hana.git</connection>
+		<url>https://github.com/liquibase/liquibase-hana</url>
 	</scm>
 
 	<developers>
+		<developer>
+			<id>liquibase</id>
+			<name>Liquibase Team</name>
+			<email>answers@liquibase.org</email>
+			<organization>Liquibase</organization>
+			<organizationUrl>http://www.liquibase.org</organizationUrl>
+		</developer>
 		<developer>
 			<id>breglerj</id>
 			<name>Jonathan Bregler</name>
@@ -57,7 +64,7 @@
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<liquibase.version>3.6.3</liquibase.version>
+		<liquibase.version>3.8.9</liquibase.version>
 	</properties>
 
 	<dependencies>
@@ -67,13 +74,13 @@
 			<version>${liquibase.version}</version>
 			<optional>true</optional>
 		</dependency>
-		<dependency>
-			<groupId>org.liquibase</groupId>
-			<artifactId>liquibase-core</artifactId>
-			<version>${liquibase.version}</version>
-			<type>test-jar</type>
-			<scope>test</scope>
-		</dependency>
+<!--		<dependency>-->
+<!--			<groupId>org.liquibase</groupId>-->
+<!--			<artifactId>liquibase-core</artifactId>-->
+<!--			<version>${liquibase.version}</version>-->
+<!--			<type>test-jar</type>-->
+<!--			<scope>test</scope>-->
+<!--		</dependency>-->
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
