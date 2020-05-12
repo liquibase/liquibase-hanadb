@@ -1,5 +1,6 @@
 package liquibase.ext.hana.datatype;
 
+import liquibase.Scope;
 import liquibase.database.Database;
 import liquibase.datatype.DataTypeInfo;
 import liquibase.datatype.DatabaseDataType;
@@ -13,8 +14,6 @@ import liquibase.logging.Logger;
 @DataTypeInfo(name = "uuid", aliases = { "uniqueidentifier",
 		"java.util.UUID" }, minParameters = 0, maxParameters = 0, priority = LiquibaseDataType.PRIORITY_DATABASE)
 public class UUIDTypeHana extends UUIDType {
-
-	private static final Logger LOG = LogService.getLog( UUIDTypeHana.class );
 
 	@Override
 	public int getPriority() {
@@ -34,7 +33,7 @@ public class UUIDTypeHana extends UUIDType {
 			}
 		}
 		catch (DatabaseException e) {
-			LOG.warning( "Unable to determine the database version.", e );
+			Scope.getCurrentScope().getLog(getClass()).warning( "Unable to determine the database version.", e );
 		}
 		return new DatabaseDataType( "VARCHAR", 36 );
 	}

@@ -6,6 +6,7 @@ import static org.junit.Assert.assertNull;
 import java.util.ArrayList;
 import java.util.List;
 
+import liquibase.Scope;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -82,7 +83,7 @@ public class DropDefaultValueChangeTest extends BaseTestCase {
 	public void getChangeMetaData() {
 		DropDefaultValueChange change = new DropDefaultValueChange();
 
-		ChangeFactory changeFactory = ChangeFactory.getInstance();
+		ChangeFactory changeFactory = Scope.getCurrentScope().getSingleton(ChangeFactory.class);
 
 		assertEquals("dropDefaultValue", changeFactory.getChangeMetaData(change).getName());
 		assertEquals("Removes the database default value for a column",

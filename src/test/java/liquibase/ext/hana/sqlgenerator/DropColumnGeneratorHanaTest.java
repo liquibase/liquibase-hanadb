@@ -21,7 +21,6 @@ public class DropColumnGeneratorHanaTest {
 	@Test
 	public void testDropColumn() {
 		final DropColumnStatement statement = new DropColumnStatement("", "", "TABLE", "COLUMN1");
-		DataTypeFactory.getInstance().register(IntTypeHana.class);
 		assertTrue(generator.supports(statement, database));
 		assertFalse(generator.validate(statement, database, null).hasErrors());
 		final Sql[] sql = generator.generateSql(statement, database, null);
@@ -35,7 +34,6 @@ public class DropColumnGeneratorHanaTest {
 		final DropColumnStatement statement2 = new DropColumnStatement("", "", "TABLE", "COLUMN2");
 		final DropColumnStatement statement = new DropColumnStatement(
 				Arrays.asList(new DropColumnStatement[] { statement1, statement2 }));
-		DataTypeFactory.getInstance().register(IntTypeHana.class);
 		assertTrue(generator.supports(statement, database));
 		assertFalse(generator.validate(statement, database, null).hasErrors());
 		final Sql[] sql = generator.generateSql(statement, database, null);
@@ -49,7 +47,6 @@ public class DropColumnGeneratorHanaTest {
 		final DropColumnStatement statement2 = new DropColumnStatement("", "", "TABLE2", "COLUMN2");
 		final DropColumnStatement statement = new DropColumnStatement(
 				Arrays.asList(new DropColumnStatement[] { statement1, statement2 }));
-		DataTypeFactory.getInstance().register(IntTypeHana.class);
 		assertTrue(generator.supports(statement, database));
 		assertTrue(generator.validate(statement, database, null).hasErrors());
 	}
@@ -60,7 +57,6 @@ public class DropColumnGeneratorHanaTest {
 		final DropColumnStatement statement2 = new DropColumnStatement("", "", "TABLE", "COLUMN2");
 		final DropColumnStatement statement = new DropColumnStatement(
 				Arrays.asList(new DropColumnStatement[] { statement1, statement2 }));
-		DataTypeFactory.getInstance().register(IntTypeHana.class);
 		assertTrue(generator.supports(statement, database));
 		assertFalse(generator.validate(statement, database, null).hasErrors());
 		final Sql[] sql = generator.generateSql(statement, database, null);

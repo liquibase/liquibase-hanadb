@@ -18,7 +18,7 @@ Include this in your application project to run Liquibase database migration scr
 Clone or download the repository to your local computer. 
 
 ```
-git clone https://github.com/SAP/hana-liquibase.git
+git clone https://github.com/liquibase/liquibase-liquibase.git
 cd hana-liquibase
 ```
 
@@ -94,4 +94,4 @@ If you have questions or find a bug, please open an issue in this project's bug 
 
 Copyright (c) 2019 SAP SE or an SAP affiliate company. All rights reserved.
 
-This file is licensed under the Apache Software License, v. 2 except as noted otherwise in the [LICENSE](https://github.com/SAP/hana-liquibase/blob/master/LICENSE) file.
+This file is licensed under the Apache Software License, v. 2 except as noted otherwise in the [LICENSE](https://github.com/liquibase/liquibase-hana/blob/master/LICENSE) file.
