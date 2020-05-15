@@ -1,0 +1,39 @@
+version: "3.8"
+services:
+
+  hana:
+    image: store/saplabs/hanaexpress:2.00.036.00.20190223.1
+    ports:
+      - "39013:39013"
+      - "39015:39015"
+      - "39017:39017"
+      - "39041-39045:39041-39045"
+      - "1128-1129:1128-1129"
+      - "59013-59014:59013-59014"
+    ulimits:
+      nofile:
+        hard: 1048576
+        soft: 1048576
+    sysctls:
+      - kernel.shmmax=1073741824
+      - net.ipv4.ip_local_port_range=40000 60999
+      - kernel.shmmni=524288
+      - kernel.shmall=8388608
+    volumes:
+      - "HXE:/hana/mounts"
+    command: --passwords-url file:///hana/mounts/passwords.json --agree-to-sap-license
+    
+    
+volumes:
+    HXE: 
+    
+# DONE    
+# Create the passwords.json file in the /docker directory instead of having it created by bash in the .travis.yml file
+# Add the volume config to the docker-compose file to get that passwords.json  file in the container
+# See if there is a way to get the hdbsql -u SYSTEM -p L1qu1base_test -i 90 -d HXE 'CREATE USER LIQUIBASE_TEST PASSWORD L1qu1base_test NO FORCE_FIRST_PASSWORD_CHANGE' line from travis into the docker-compose file somehow. They maybe don't have the same init.sql logic in their container that mysql/postgresql does but perhaps something similar? Or maybe there is a way to have post-start logic in docker-compose?
+
+# TODO
+# Start the container using only docker-compose and make sure it works
+# Update the default integration test hostname to be localhost not hxehost
+# Run the integration tests against just docker-compose and make sure they are happy (even if one test is failing still)
+# Update .travis.yaml to start the compose database, not do that work itself    
