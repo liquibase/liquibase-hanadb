@@ -34,7 +34,7 @@ public class AddColumnGeneratorHana extends AddColumnGenerator {
         if (statement.isAutoIncrement()) {
             AutoIncrementConstraint autoIncrementConstraint = statement.getAutoIncrementConstraint();
             alterTable += " " + database.getAutoIncrementClause(autoIncrementConstraint.getStartWith(),
-                    autoIncrementConstraint.getIncrementBy());
+                    autoIncrementConstraint.getIncrementBy(), autoIncrementConstraint.getGenerationType(), autoIncrementConstraint.getDefaultOnNull());
         }
 
         Object defaultValue = statement.getDefaultValue();

@@ -34,8 +34,8 @@
 	
 	<changeSet author="breglerj" id="5">
 		<dropColumn tableName="MY_TAB">
-			<column name="C2" />
-			<column name="C3" />
+			<column name="C2"/>
+			<column name="C3"/>
 		</dropColumn>
 	</changeSet>
 
