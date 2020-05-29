@@ -115,13 +115,13 @@ public class DropColumnChangeTest extends BaseTestCase {
 
 		ColumnConfig c1 = new ColumnConfig();
 		c1.setName("C1");
-		c1.setType("INTEGER");
+		//c1.setType("INTEGER");
 
 		change.addColumn(c1);
 
 		ColumnConfig c2 = new ColumnConfig();
 		c2.setName("C2");
-		c2.setType("NVARCHAR(256)");
+		//c2.setType("NVARCHAR(256)");
 
 		change.addColumn(c2);
 
