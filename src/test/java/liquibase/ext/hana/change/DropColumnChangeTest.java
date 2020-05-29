@@ -128,16 +128,16 @@ public class DropColumnChangeTest extends BaseTestCase {
 		assertEquals("Columns C1,C2 dropped from " + change.getTableName(), change.getConfirmationMessage());
 	}
 
-	@Test
-	public void getChangeMetaData() {
-		DropColumnChange change = new DropColumnChange();
-
-		ChangeFactory changeFactory = ChangeFactory.getInstance();
-
-		assertEquals("dropColumn", changeFactory.getChangeMetaData(change).getName());
-		assertEquals("Drop existing column(s)", changeFactory.getChangeMetaData(change).getDescription());
-		assertEquals(ChangeMetaData.PRIORITY_DEFAULT, changeFactory.getChangeMetaData(change).getPriority());
-	}
+//	@Test
+//	public void getChangeMetaData() {
+//		DropColumnChange change = new DropColumnChange();
+//
+//		ChangeFactory changeFactory = ChangeFactory.getInstance();
+//
+//		assertEquals("dropColumn", changeFactory.getChangeMetaData(change).getName());
+//		assertEquals("Drop existing column(s)", changeFactory.getChangeMetaData(change).getDescription());
+//		assertEquals(ChangeMetaData.PRIORITY_DEFAULT, changeFactory.getChangeMetaData(change).getPriority());
+//	}
 
 	@Test
 	public void parseAndGenerate() throws Exception {
