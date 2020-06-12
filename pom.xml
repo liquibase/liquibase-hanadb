@@ -1,17 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
-	<groupId>com.sap.foss.hana</groupId>
-	<artifactId>liquibase-hana</artifactId>
-	<version>1.0.2-SNAPSHOT</version>
-	<packaging>jar</packaging>
+	<groupId>org.liquibase.ext</groupId>
+	<artifactId>liquibase-hanadb</artifactId>
+	<version>3.9.1-SNAPSHOT</version>
 
-	<name>SAP HANA Liquibase Extension</name>
-	<description>Liquibase extension for SAP HANA</description>
-	<url>https://github.com/liquibase/liquibase-hana</url>
+	<name>Liquibase HANA Database Integration</name>
+	<description>Liquibase extension for SAP's HANA database</description>
+	<url>https://github.com/liquibase/liquibase-hanadb</url>
 
 	<organization>
 		<name>Liquibase</name>
@@ -30,9 +27,10 @@
 	</issueManagement>
 
 	<scm>
-		<connection>https://github.com/liquibase/liquibase-hana.git</connection>
+		<connection>scm:git:http://github.com/liquibase/liquibase-hana.git</connection>
 		<url>https://github.com/liquibase/liquibase-hana</url>
-	</scm>
+	  <tag>HEAD</tag>
+  </scm>
 
 	<developers>
 		<developer>
@@ -51,16 +49,6 @@
 		</developer>
 	</developers>
 
-	<distributionManagement>
-		<snapshotRepository>
-			<id>ossrh</id>
-			<url>https://oss.sonatype.org/content/repositories/snapshots</url>
-		</snapshotRepository>
-		<repository>
-			<id>ossrh</id>
-			<url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
-		</repository>
-	</distributionManagement>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -71,16 +59,8 @@
 		<dependency>
 			<groupId>org.liquibase</groupId>
 			<artifactId>liquibase-core</artifactId>
-			<version>${liquibase.version}</version>
-			<optional>true</optional>
+			<version>3.8.9</version>
 		</dependency>
-<!--		<dependency>-->
-<!--			<groupId>org.liquibase</groupId>-->
-<!--			<artifactId>liquibase-core</artifactId>-->
-<!--			<version>${liquibase.version}</version>-->
-<!--			<type>test-jar</type>-->
-<!--			<scope>test</scope>-->
-<!--		</dependency>-->
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
@@ -108,7 +88,7 @@
 					<artifactId>maven-resources-plugin</artifactId>
 					<version>3.1.0</version>
 					<configuration>
-						<encoding>${project.build.sourceEncoding}</encoding>
+						<encoding>UTF-8</encoding>
 					</configuration>
 				</plugin>
 
@@ -169,87 +149,77 @@
 						<stagingRepository>/tmp/maven-snapshot</stagingRepository>
 						<mavenExecutorId>forked-path</mavenExecutorId>
 						<pushChanges>false</pushChanges>
-						<useReleaseProfile>false</useReleaseProfile>
-						<releaseProfiles>release-sign-artifacts</releaseProfiles>
 					</configuration>
 				</plugin>
 
 				<plugin>
-					<groupId>eu.somatik.serviceloader-maven-plugin</groupId>
-					<artifactId>serviceloader-maven-plugin</artifactId>
-					<version>1.3.0</version>
-				</plugin>
-
-				<plugin>
-					<groupId>org.apache.maven.plugins</groupId>
-					<artifactId>maven-source-plugin</artifactId>
-					<version>3.2.1</version>
-				</plugin>
-
-				<plugin>
-					<groupId>org.apache.maven.plugins</groupId>
-					<artifactId>maven-javadoc-plugin</artifactId>
-					<version>3.2.0</version>
+					<artifactId>maven-deploy-plugin</artifactId>
 					<configuration>
-						<encoding>${project.build.sourceEncoding}</encoding>
+						<skip>false</skip>
 					</configuration>
+				</plugin>
+
+				<plugin>
+					<groupId>org.sonatype.plugins</groupId>
+					<artifactId>nexus-staging-maven-plugin</artifactId>
+					<version>1.6.8</version>
+					<extensions>true</extensions>
+					<executions>
+						<execution>
+							<id>default-deploy</id>
+							<phase>deploy</phase>
+							<goals>
+								<goal>deploy</goal>
+							</goals>
+						</execution>
+					</executions>
+					<configuration>
+						<serverId>sonatype-nexus-staging</serverId>
+						<nexusUrl>https://oss.sonatype.org/service/local/staging/deploy/maven2/</nexusUrl>
+					</configuration>
+				</plugin>
+				<plugin>
+    					<groupId>org.apache.maven.plugins</groupId>
+    					<artifactId>maven-javadoc-plugin</artifactId>
+					<configuration>
+						<author>false</author>
+        					<doctitle>Liquibase CDI ${project.version} API</doctitle>
+        					<quiet>true</quiet>
+        					<doclint>none</doclint>
+        					<encoding>UTF-8</encoding>
+        					<jarOutputDirectory>${project.basedir}/target</jarOutputDirectory>
+    					</configuration>
+    					<executions>
+        					<execution>
+            						<id>jar-javadoc</id>
+            						<goals>
+                						<goal>jar</goal>
+            						</goals>
+            						<phase>package</phase>
+        					</execution>
+    					</executions>
 				</plugin>
 			</plugins>
 
 		</pluginManagement>
-
-		<plugins>
-			<plugin>
-				<groupId>eu.somatik.serviceloader-maven-plugin</groupId>
-				<artifactId>serviceloader-maven-plugin</artifactId>
-				<configuration>
-					<services>
-						<param>liquibase.database.Database</param>
-						<param>liquibase.sqlgenerator.SqlGenerator</param>
-						<param>liquibase.snapshot.SnapshotGenerator</param>
-						<param>liquibase.datatype.LiquibaseDataType</param>
-						<param>liquibase.change.Change</param>
-					</services>
-				</configuration>
-				<executions>
-					<execution>
-						<goals>
-							<goal>generate</goal>
-						</goals>
-					</execution>
-				</executions>
-			</plugin>
-
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-source-plugin</artifactId>
-				<executions>
-					<execution>
-						<id>attach-sources</id>
-						<goals>
-							<goal>jar-no-fork</goal>
-						</goals>
-					</execution>
-				</executions>
-			</plugin>
-
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-javadoc-plugin</artifactId>
-				<executions>
-					<execution>
-						<id>attach-javadocs</id>
-						<goals>
-							<goal>jar</goal>
-						</goals>
-					</execution>
-				</executions>
-			</plugin>
-		</plugins>
 	</build>
+
+	<distributionManagement>
+		<repository>
+			<id>sonatype-nexus-staging</id>
+			<name>Nexus Release Repository</name>
+			<url>https://oss.sonatype.org/service/local/staging/deploy/maven2</url>
+		</repository>
+		<snapshotRepository>
+			<id>sonatype-nexus-snapshots</id>
+			<name>Sonatype Nexus Snapshots</name>
+			<url>https://oss.sonatype.org/content/repositories/snapshots</url>
+		</snapshotRepository>
+	</distributionManagement>
 
 	<profiles>
 		<profile>
+            <!-- Required for deployment to Sonatype -->
 			<id>release-sign-artifacts</id>
 			<activation>
 				<property>
@@ -262,7 +232,17 @@
 					<plugin>
 						<groupId>org.apache.maven.plugins</groupId>
 						<artifactId>maven-gpg-plugin</artifactId>
-						<version>1.6</version>
+    						<version>1.6</version>
+                				<configuration>
+                    					<passphrase>${env.GPG_PASSPHRASE}</passphrase>
+                    					<gpgArguments>
+                        					<!-- This is necessary for gpg to not try to use the pinentry programs -->
+                        					<arg>--batch</arg>
+                        					<arg>--no-tty</arg>
+                        					<arg>--pinentry-mode</arg>
+                        					<arg>loopback</arg>
+                    					</gpgArguments>
+                				</configuration>
 						<executions>
 							<execution>
 								<id>sign-artifacts</id>
@@ -272,18 +252,6 @@
 								</goals>
 							</execution>
 						</executions>
-					</plugin>
-
-					<plugin>
-						<groupId>org.sonatype.plugins</groupId>
-						<artifactId>nexus-staging-maven-plugin</artifactId>
-						<version>1.6.8</version>
-						<extensions>true</extensions>
-						<configuration>
-							<serverId>ossrh</serverId>
-							<nexusUrl>https://oss.sonatype.org/</nexusUrl>
-							<autoReleaseAfterClose>true</autoReleaseAfterClose>
-						</configuration>
 					</plugin>
 				</plugins>
 			</build>
