@@ -136,7 +136,6 @@ public class DropColumnChangeTest extends BaseTestCase {
 		ChangeFactory changeFactory = Scope.getCurrentScope().getSingleton(ChangeFactory.class);
 
 		assertEquals("dropColumn", changeFactory.getChangeMetaData(change).getName());
-		assertEquals("Drop existing column(s)", changeFactory.getChangeMetaData(change).getDescription());
 		assertEquals(ChangeMetaData.PRIORITY_DEFAULT, changeFactory.getChangeMetaData(change).getPriority());
 	}
 
