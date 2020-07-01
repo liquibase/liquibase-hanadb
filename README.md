@@ -18,8 +18,8 @@ Include this in your application project to run Liquibase database migration scr
 Clone or download the repository to your local computer. 
 
 ```
-git clone https://github.com/SAP/hana-liquibase.git
-cd hana-liquibase
+git clone https://github.com/liquibase/liquibase-hana.git
+cd liquibase-hana
 ```
 
 ## Installation
@@ -77,13 +77,13 @@ If you want to use the Liquibase HANA extension in an application project, add t
 <dependency>
      <groupId>org.liquibase.ext</groupId>
      <artifactId>liquibase-hanadb</artifactId>
-     <version>3.9.0</version>
+     <version>3.10.0</version>
 </dependency>
 ```
 
 ### Gradle
 ```
-implementation 'org.liquibase.ext:liquibase-hanadb:3.9.0'
+implementation 'org.liquibase.ext:liquibase-hanadb:3.10.0'
 ```
 
 # How to obtain support
