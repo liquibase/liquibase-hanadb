@@ -1,7 +1,9 @@
 package liquibase.ext.hana.snapshot;
+
 import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
+
 import liquibase.Scope;
 import liquibase.database.Database;
 import liquibase.exception.DatabaseException;
@@ -17,7 +19,9 @@ import liquibase.structure.core.Relation;
 import liquibase.structure.core.Schema;
 import liquibase.structure.core.Table;
 import liquibase.structure.core.UniqueConstraint;
+
 public class UniqueConstraintSnapshotGeneratorHana extends UniqueConstraintSnapshotGenerator {
+    
     @Override
     public int getPriority(Class<? extends DatabaseObject> objectType, Database database) {
         if (database instanceof HanaDatabase) {
@@ -26,16 +30,20 @@ public class UniqueConstraintSnapshotGeneratorHana extends UniqueConstraintSnaps
             return PRIORITY_NONE; // Other DB? Let the generic handler do it.
         }
     }
+    
     @Override
     public Class<? extends SnapshotGenerator>[] replaces() {
         return new Class[] { UniqueConstraintSnapshotGenerator.class };
     }
+    
     @Override
     protected List<CachedRow> listConstraints(Table table, DatabaseSnapshot snapshot, Schema schema)
             throws DatabaseException, SQLException {
         return new ResultSetExtractorHana(snapshot, schema.getCatalogName(), schema.getName(), table.getName())
                 .fastFetch();
     }
+    
+    
     @Override
     protected List<Map<String, ?>> listColumns(UniqueConstraint example, Database database, DatabaseSnapshot snapshot)
             throws DatabaseException {
@@ -58,6 +66,7 @@ public class UniqueConstraintSnapshotGeneratorHana extends UniqueConstraintSnaps
         }
         List<Map<String, ?>> rows = Scope.getCurrentScope().getSingleton(ExecutorService.class).getExecutor("jdbc", database)
                 .queryForList(new RawSqlStatement(sql));
+        
         return rows;
     }
 }
