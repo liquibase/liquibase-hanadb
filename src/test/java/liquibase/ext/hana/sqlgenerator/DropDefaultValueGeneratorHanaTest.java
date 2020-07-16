@@ -19,7 +19,6 @@ public class DropDefaultValueGeneratorHanaTest {
     @Test
     public void testGenerateSqlDropDefaultValueStatementDatabaseSqlGeneratorChain() {
         final DropDefaultValueStatement statement = new DropDefaultValueStatement("", "", "TABLE", "COLUMN", "INTEGER");
-        DataTypeFactory.getInstance().register(IntTypeHana.class);
 		assertTrue(generator.supports(statement, database));
 		assertFalse(generator.validate(statement, database, null).hasErrors());
         final Sql[] sql = generator.generateSql(statement, database, null);

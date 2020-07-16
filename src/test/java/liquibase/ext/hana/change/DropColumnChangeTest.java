@@ -6,6 +6,7 @@ import static org.junit.Assert.assertNull;
 import java.util.ArrayList;
 import java.util.List;
 
+import liquibase.Scope;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -132,7 +133,7 @@ public class DropColumnChangeTest extends BaseTestCase {
 	public void getChangeMetaData() {
 		DropColumnChange change = new DropColumnChange();
 
-		ChangeFactory changeFactory = ChangeFactory.getInstance();
+		ChangeFactory changeFactory = Scope.getCurrentScope().getSingleton(ChangeFactory.class);
 
 		assertEquals("dropColumn", changeFactory.getChangeMetaData(change).getName());
 		assertEquals(ChangeMetaData.PRIORITY_DEFAULT, changeFactory.getChangeMetaData(change).getPriority());

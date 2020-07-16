@@ -19,7 +19,6 @@ public class AlterTableStoreGeneratorHanaTest {
 	@Test
 	public void testColumn() {
 		final AlterTableStoreStatement statement = new AlterTableStoreStatement("", "TABLE", "COLUMN");
-		DataTypeFactory.getInstance().register(IntTypeHana.class);
 		assertTrue(generator.supports(statement, database));
 		assertFalse(generator.validate(statement, database, null).hasErrors());
 		final Sql[] sql = generator.generateSql(statement, database, null);
@@ -30,7 +29,6 @@ public class AlterTableStoreGeneratorHanaTest {
 	@Test
 	public void testRow() {
 		final AlterTableStoreStatement statement = new AlterTableStoreStatement("", "TABLE", "ROW");
-		DataTypeFactory.getInstance().register(IntTypeHana.class);
 		assertTrue(generator.supports(statement, database));
 		assertFalse(generator.validate(statement, database, null).hasErrors());
 		final Sql[] sql = generator.generateSql(statement, database, null);
@@ -41,7 +39,6 @@ public class AlterTableStoreGeneratorHanaTest {
 	@Test
 	public void testInvalid() {
 		final AlterTableStoreStatement statement = new AlterTableStoreStatement("", "TABLE", "NOSTORE");
-		DataTypeFactory.getInstance().register(IntTypeHana.class);
 		assertTrue(generator.supports(statement, database));
 		assertTrue(generator.validate(statement, database, null).hasErrors());
 	}

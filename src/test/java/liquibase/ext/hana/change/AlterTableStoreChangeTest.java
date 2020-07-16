@@ -5,6 +5,7 @@ import static org.junit.Assert.assertEquals;
 import java.util.ArrayList;
 import java.util.List;
 
+import liquibase.Scope;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -80,7 +81,7 @@ public class AlterTableStoreChangeTest extends BaseTestCase {
     public void getChangeMetaData() {
         AlterTableStoreChange mergeTablesChange = new AlterTableStoreChange();
 
-        ChangeFactory changeFactory = ChangeFactory.getInstance();
+        ChangeFactory changeFactory = Scope.getCurrentScope().getSingleton(ChangeFactory.class);
 
         assertEquals("alterTableStore", changeFactory.getChangeMetaData(mergeTablesChange).getName());
         assertEquals("Alter Table Store (Column/Row)",

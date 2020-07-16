@@ -1,0 +1,2 @@
+liquibase.ext.hana.change.AddLookupTableChangeHana
+liquibase.ext.hana.change.AlterTableStoreChange

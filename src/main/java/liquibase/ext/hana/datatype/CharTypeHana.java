@@ -1,5 +1,6 @@
 package liquibase.ext.hana.datatype;
 
+import liquibase.Scope;
 import liquibase.database.Database;
 import liquibase.datatype.DataTypeInfo;
 import liquibase.datatype.DatabaseDataType;
@@ -13,8 +14,6 @@ import liquibase.logging.Logger;
 @DataTypeInfo(name = "char", aliases = { "java.sql.Types.CHAR",
 		"bpchar" }, minParameters = 0, maxParameters = 1, priority = LiquibaseDataType.PRIORITY_DATABASE)
 public class CharTypeHana extends CharType {
-
-	private static final Logger LOG = LogService.getLog( CharTypeHana.class );
 
 	@Override
 	public int getPriority() {
@@ -35,7 +34,7 @@ public class CharTypeHana extends CharType {
 			}
 		}
 		catch (DatabaseException e) {
-			LOG.warning( "Unable to determine the database version.", e );
+			Scope.getCurrentScope().getLog(getClass()).warning( "Unable to determine the database version.", e );
 		}
 
 		Object[] parameters = getParameters();
