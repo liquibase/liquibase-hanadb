@@ -1,0 +1,22 @@
+<databaseChangeLog
+	xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+	xmlns:hana="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd
+        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+	<changeSet author="breglerj" id="1">
+		<sql>CREATE ROW TABLE MY_TAB(id int, text nvarchar(255))</sql>
+		<sql>CREATE ROW TABLE MY_TAB2(id int, fk int, fk2 int)</sql>
+		<addPrimaryKey columnNames="id" tableName="MY_TAB"/>
+		<addPrimaryKey columnNames="id" tableName="MY_TAB2"/>
+	</changeSet>
+
+	<changeSet id="2" author="fdambrine">
+		<addForeignKeyConstraint baseTableName="MY_TAB2" baseColumnNames="fk" constraintName="fktest"
+								 referencedTableName="MY_TAB" referencedColumnNames="id" onDelete="NO ACTION"/>
+		<addForeignKeyConstraint baseTableName="MY_TAB2" baseColumnNames="fk2" constraintName="fktest2"
+								 referencedTableName="MY_TAB" referencedColumnNames="id" onDelete="CASCADE"/>
+	</changeSet>
+
+</databaseChangeLog>
