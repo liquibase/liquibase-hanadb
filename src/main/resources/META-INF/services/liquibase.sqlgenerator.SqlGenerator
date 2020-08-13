@@ -1,6 +1,7 @@
 liquibase.ext.hana.sqlgenerator.AddAutoIncrementGeneratorHana
 liquibase.ext.hana.sqlgenerator.AddColumnGeneratorHana
 liquibase.ext.hana.sqlgenerator.AddDefaultValueGeneratorHana
+liquibase.ext.hana.sqlgenerator.AddForeignKeyConstraintGeneratorHana
 liquibase.ext.hana.sqlgenerator.AlterSequenceGeneratorHana
 liquibase.ext.hana.sqlgenerator.AlterTableStoreGenerator
 liquibase.ext.hana.sqlgenerator.CreateDatabaseChangeLogLockTableGeneratorHana
