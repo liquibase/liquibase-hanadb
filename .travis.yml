@@ -11,6 +11,8 @@ env:
     - |-
       PASSWORD_FILE_CONTENT='{"master_password" : "L1qu1base_test"}'
     - PASSWORD_FILE_NAME=passwords.json
+    #DOCKER_PASSWORD
+    - secure: "PFIoQG3vtFb4ESxzEFmXgOaBsd9QNhhus1lyE2ZifrdOw4okPvwoUSK7nHs1+ebciwWi990nocdZHif5fiUOehD6W3ZLdHsyRmo0gXl1d6BYvl0Hq4MIhfhGplIoW43cE4tx3rNGGqeN0vYTcKb3tF1cItRaQsoHRDoGZCTe8XQFa/oczlguauW4/Kiii9cigyWBpBnKuWktar5pYjkf9kwYpV28wftD5Pk0LNYbNztiHM53S2gNELMLjucQ0z1PFKgTiUNanGFxKaYzk5mf6++2poslVFmtpmyAIyStCwfW0PHHh22ksexL4vmEui4dFrWVPCedaNMFpmCkQ7ddrzqhupUbUkj7t71nTNXjV7SvSo/O9oO07FwV8bw+XAYPSPGUQr0NwX7gpaiGDIAqK7LwS7rddiEzdDj6Y/sFdatRo8j0IR1hgWBqKpd4f2jrzDgqGgkpI5AEryy054UE8vu3cqIt9A6FTaVsnzPIrBuFtCBkwHL2gYURzIWmzBwlFtZ+DG6yYTu+ggj++M+xUcmM5DTO6w1BqJGQ14xcZpodeik35eJVi+Og5GISL+6/cieOrlYlHxla8dTWIhRZsG1xnovUkHwwEkTFiRMU/thFo24/zrDkx6WcC00zbkPJiwSQ/9Yn9KRin7LXvk+yr5XF0PSoQHxJgmlMvAV8IwY="
 
 before_script:
   - mkdir $TRAVIS_BUILD_DIR/HXE
