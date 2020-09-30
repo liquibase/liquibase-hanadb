@@ -14,7 +14,7 @@ before_script:
 - chmod -R 777 $TRAVIS_BUILD_DIR/HXE
 - echo $PASSWORD_FILE_CONTENT > $TRAVIS_BUILD_DIR/HXE/$PASSWORD_FILE_NAME
 - chmod 777 $TRAVIS_BUILD_DIR/HXE/$PASSWORD_FILE_NAME
-- echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+- echo "$DOCKER_PASSWORD" | docker login --username "$DOCKER_USERNAME" --password-stdin
 - docker pull store/saplabs/hanaexpress:$HXE_VERSION
 - docker run -d -p 39013:39013 -p 39015:39015 -p 39017:39017 -p 39041-39045:39041-39045
   -p 1128-1129:1128-1129 -p 59013-59014:59013-59014 -v $TRAVIS_BUILD_DIR/HXE:/hana/mounts
