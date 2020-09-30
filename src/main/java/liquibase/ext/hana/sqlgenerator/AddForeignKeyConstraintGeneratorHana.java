@@ -48,14 +48,8 @@ public class AddForeignKeyConstraintGeneratorHana extends AddForeignKeyConstrain
             sb.append(" ON DELETE ").append(statement.getOnDelete());
         }
 
-        if (statement.isDeferrable() || statement.isInitiallyDeferred()) {
-            if (statement.isDeferrable()) {
-                sb.append(" DEFERRABLE");
-            }
-
-            if (statement.isInitiallyDeferred()) {
-                sb.append(" INITIALLY DEFERRED");
-            }
+        if (statement.isInitiallyDeferred()) {
+            sb.append(" INITIALLY DEFERRED");
         }
 
         return new Sql[] { new UnparsedSql(sb.toString(), getAffectedForeignKey(statement)) };
