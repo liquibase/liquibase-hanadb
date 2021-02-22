@@ -4,7 +4,7 @@
 
 	<groupId>org.liquibase.ext</groupId>
 	<artifactId>liquibase-hanadb</artifactId>
-	<version>4.3.1</version>
+	<version>4.3.2-SNAPSHOT</version>
 
 	<name>Liquibase HANA Database Integration</name>
 	<description>Liquibase extension for SAP's HANA database</description>
@@ -29,7 +29,7 @@
 	<scm>
 		<connection>scm:git:http://github.com/liquibase/liquibase-hana.git</connection>
 		<url>https://github.com/liquibase/liquibase-hana</url>
-	  <tag>liquibase-hanadb-4.3.1</tag>
+	  <tag>HEAD</tag>
   </scm>
 
 	<developers>
