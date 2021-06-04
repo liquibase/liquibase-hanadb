@@ -18,7 +18,7 @@ import liquibase.changelog.DatabaseChangeLog;
 import liquibase.database.Database;
 import liquibase.ext.hana.HanaDatabase;
 import liquibase.ext.hana.statement.AlterTableStoreStatement;
-import liquibase.ext.hana.testing.BaseTestCase;
+import liquibase.ext.hana.testing.ITBase;
 import liquibase.parser.ChangeLogParserFactory;
 import liquibase.resource.ClassLoaderResourceAccessor;
 import liquibase.resource.ResourceAccessor;
@@ -26,7 +26,7 @@ import liquibase.sql.Sql;
 import liquibase.sqlgenerator.SqlGeneratorFactory;
 import liquibase.statement.SqlStatement;
 
-public class AlterTableStoreChangeTest extends BaseTestCase {
+public class AlterTableStoreChangeIT extends ITBase {
 
     @Before
     public void setUp() throws Exception {
