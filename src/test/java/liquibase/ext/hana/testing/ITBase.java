@@ -14,7 +14,7 @@ import liquibase.database.jvm.JdbcConnection;
 import liquibase.exception.DatabaseException;
 import liquibase.resource.ClassLoaderResourceAccessor;
 
-public class BaseTestCase {
+public abstract class ITBase {
     private static String url;
     private static Driver driver;
     private static Properties info;

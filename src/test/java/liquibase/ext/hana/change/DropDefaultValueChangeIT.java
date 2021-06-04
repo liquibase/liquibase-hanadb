@@ -1,37 +1,33 @@
 package liquibase.ext.hana.change;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNull;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import liquibase.Scope;
 import org.junit.Before;
 import org.junit.Test;
 
+import liquibase.Scope;
 import liquibase.change.Change;
 import liquibase.change.ChangeFactory;
 import liquibase.change.ChangeMetaData;
-import liquibase.change.ColumnConfig;
-import liquibase.change.core.DropColumnChange;
 import liquibase.change.core.DropDefaultValueChange;
 import liquibase.changelog.ChangeLogParameters;
 import liquibase.changelog.ChangeSet;
 import liquibase.changelog.DatabaseChangeLog;
 import liquibase.database.Database;
 import liquibase.ext.hana.HanaDatabase;
-import liquibase.ext.hana.testing.BaseTestCase;
+import liquibase.ext.hana.testing.ITBase;
 import liquibase.parser.ChangeLogParserFactory;
 import liquibase.resource.ClassLoaderResourceAccessor;
 import liquibase.resource.ResourceAccessor;
 import liquibase.sql.Sql;
 import liquibase.sqlgenerator.SqlGeneratorFactory;
 import liquibase.statement.SqlStatement;
-import liquibase.statement.core.DropColumnStatement;
 import liquibase.statement.core.DropDefaultValueStatement;
 
-public class DropDefaultValueChangeTest extends BaseTestCase {
+public class DropDefaultValueChangeIT extends ITBase {
 
 	@Before
 	public void setUp() throws Exception {
