@@ -2,9 +2,9 @@ package liquibase.ext.hana.change;
 
 import org.junit.*;
 
-import liquibase.ext.hana.testing.BaseTestCase;
+import liquibase.ext.hana.testing.ITBase;
 
-public class AddForeignKeyChangeTest extends BaseTestCase {
+public class AddForeignKeyChangeIT extends ITBase {
     @Before
     public void setUp() throws Exception {
         changeLogFile = "changelogs/AddForeignKeyChangelog/changelog.test.xml";
