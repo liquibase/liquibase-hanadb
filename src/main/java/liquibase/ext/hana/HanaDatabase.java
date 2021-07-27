@@ -1,21 +1,5 @@
 package liquibase.ext.hana;
 
-import liquibase.CatalogAndSchema;
-import liquibase.Scope;
-import liquibase.database.AbstractJdbcDatabase;
-import liquibase.database.DatabaseConnection;
-import liquibase.database.ObjectQuotingStrategy;
-import liquibase.database.core.MariaDBDatabase;
-import liquibase.database.core.MySQLDatabase;
-import liquibase.database.jvm.JdbcConnection;
-import liquibase.exception.DatabaseException;
-import liquibase.statement.DatabaseFunction;
-import liquibase.statement.SqlStatement;
-import liquibase.statement.core.RawCallStatement;
-import liquibase.structure.DatabaseObject;
-import liquibase.structure.core.Schema;
-import liquibase.structure.core.Table;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -24,6 +8,20 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Locale;
 import java.util.Set;
+
+import liquibase.CatalogAndSchema;
+import liquibase.Scope;
+import liquibase.database.AbstractJdbcDatabase;
+import liquibase.database.DatabaseConnection;
+import liquibase.database.ObjectQuotingStrategy;
+import liquibase.database.jvm.JdbcConnection;
+import liquibase.exception.DatabaseException;
+import liquibase.statement.DatabaseFunction;
+import liquibase.statement.SqlStatement;
+import liquibase.statement.core.RawCallStatement;
+import liquibase.structure.DatabaseObject;
+import liquibase.structure.core.Schema;
+import liquibase.structure.core.Table;
 
 public class HanaDatabase extends AbstractJdbcDatabase {
 
