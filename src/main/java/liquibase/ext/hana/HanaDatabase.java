@@ -1,9 +1,12 @@
 package liquibase.ext.hana;
 
+import liquibase.CatalogAndSchema;
 import liquibase.Scope;
 import liquibase.database.AbstractJdbcDatabase;
 import liquibase.database.DatabaseConnection;
 import liquibase.database.ObjectQuotingStrategy;
+import liquibase.database.core.MariaDBDatabase;
+import liquibase.database.core.MySQLDatabase;
 import liquibase.database.jvm.JdbcConnection;
 import liquibase.exception.DatabaseException;
 import liquibase.statement.DatabaseFunction;
@@ -230,6 +233,22 @@ public class HanaDatabase extends AbstractJdbcDatabase {
         }
 
         return mustQuote;
+    }
+    
+    @Override
+    public String getViewDefinition(CatalogAndSchema schema, String viewName) throws DatabaseException {
+    	String viewDefinition = super.getViewDefinition( schema, viewName );
+    	if (viewDefinition == null) {
+    		viewDefinition = "[CANNOT READ VIEW DEFINITION]";
+            String warningMessage =
+                    "\nThe current SAP HANA database user does not have permissions to access view definitions needed for this Liquibase command.\n" +
+                            "Please search the changelog for '[CANNOT READ VIEW DEFINITION]' to locate inaccessible objects. " +
+                            "The current user likely needs to be granted a metadata privilege (CATALOG READ system privilege or SELECT METADATA schema privilege).\n";
+
+            Scope.getCurrentScope().getUI().sendMessage("WARNING: " + warningMessage);
+            Scope.getCurrentScope().getLog(getClass()).warning(warningMessage);
+    	}
+    	return viewDefinition;
     }
 
     private Set<String> getDefaultReservedWords() {
