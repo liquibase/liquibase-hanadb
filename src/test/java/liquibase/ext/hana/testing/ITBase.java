@@ -54,7 +54,7 @@ public abstract class ITBase {
 
     public static void cleanDB() throws Exception {
         liquiBase = new Liquibase(changeLogFile, new ClassLoaderResourceAccessor(), jdbcConnection);
-        if (connection != null) {
+        if (connection != null && liquiBase != null) {
             liquiBase.dropAll();
         }
     }
