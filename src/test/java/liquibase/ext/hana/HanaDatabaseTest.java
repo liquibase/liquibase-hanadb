@@ -216,6 +216,5 @@ public class HanaDatabaseTest { // } extends AbstractJdbcDatabaseTest {
 		assertEquals( viewDefinition, "SELECT * FROM MY_TABLE" );
 		viewDefinition = hana.getViewDefinition( new CatalogAndSchema( null, "MY_SCHEMA" ), "MY_VIEW" );
 		assertEquals( viewDefinition, "[CANNOT READ VIEW DEFINITION]" );
-		Scope.setScopeManager(null);
 	}
 }
