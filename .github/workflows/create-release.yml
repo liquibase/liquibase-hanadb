@@ -122,7 +122,8 @@ jobs:
             target/*.jar
 
   draft-release:
-    needs: [ setup, build, integration-tests ]
+    needs: [ setup, build ]
+#    needs: [ setup, build, integration-tests ]
     name: Draft Release
     runs-on: ubuntu-latest
     steps:
