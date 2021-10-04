@@ -92,10 +92,14 @@ jobs:
           mvn -B versions:set -DnewVersion=${{ needs.setup.outputs.extensionVersion }} -DallowSnapshots=false -DoldVersion="*"
           mvn -B versions:use-dep-version -Dincludes=org.liquibase:liquibase-core -DdepVersion=${{ needs.setup.outputs.liquibaseVersion }} -DforceVersion=true
 
-          git add pom.xml
-          git commit -m "Version Bumped to ${{ needs.setup.outputs.extensionVersion }}"
-          git tag -a -m "Version Bumped to ${{ needs.setup.outputs.extensionVersion }}" liquibase-hanadb-${{ needs.setup.outputs.extensionVersion }}
-          git push "https://liquibot:$GITHUB_TOKEN@github.com/$GITHUB_REPOSITORY.git" HEAD:${{ github.ref }} --follow-tags --tags
+          if git diff --exit-code pom.xml; then
+            echo "Unchanged pom.xml"
+          else
+            git add pom.xml
+            git commit -m "Version Bumped to ${{ needs.setup.outputs.extensionVersion }}"
+            git tag -a -m "Version Bumped to ${{ needs.setup.outputs.extensionVersion }}" liquibase-hanadb-${{ needs.setup.outputs.extensionVersion }}
+            git push "https://liquibot:$GITHUB_TOKEN@github.com/$GITHUB_REPOSITORY.git" HEAD:${{ github.ref }} --follow-tags --tags
+          fi
         env:
           GITHUB_TOKEN: ${{ secrets.BOT_TOKEN }}
 
