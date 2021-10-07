@@ -85,8 +85,6 @@ jobs:
             --passwords-url file:///hana/mounts/passwords.json \
             --agree-to-sap-license
 
-#            --sysctl kernel.shmmni=524288 \
-
           sleep 10
 
           timeout 500 sh -c '
