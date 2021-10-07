@@ -88,15 +88,15 @@ jobs:
 
           sleep 10
 
-          timeout 500 sh -c '
-            while true; do
-              STARTING_CONTAINERS=`docker ps --filter "name=HXE" --format "{{.Names}} {{.Status}}" | grep "health: starting" | wc -l`;
-              echo "Waiting for $STARTING_CONTAINERS HANA container(s) to finish startup";
-              if [ $STARTING_CONTAINERS -ne 1 ]; then
-                break;
-              fi;
-              sleep 5;
-            done
+          timeout 500 sh -c ' \
+            while true; do \
+              STARTING_CONTAINERS=`docker ps --filter "name=HXE" --format "{{.Names}} {{.Status}}" | grep "health: starting" | wc -l`; \
+              echo "Waiting for $STARTING_CONTAINERS HANA container(s) to finish startup"; \
+              if [ $STARTING_CONTAINERS -ne 1 ]; then \
+                break; \
+              fi; \
+              sleep 5; \
+            done \
           '
 
           docker ps -a
