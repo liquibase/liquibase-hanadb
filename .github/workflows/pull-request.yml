@@ -25,7 +25,7 @@ jobs:
           java-version: ${{ matrix.java }}
           distribution: 'adopt'
       - name: Run Unit Tests With Maven
-        run: mvn -B clean test --file pom.xml
+        run: mvn -B clean test package
 
       - name: Archive Test Results
         if: ${{ always() }}
@@ -79,11 +79,13 @@ jobs:
             --ulimit nofile=1048576:1048576 \
             --sysctl kernel.shmmax=1073741824 \
             --sysctl net.ipv4.ip_local_port_range='40000 60999' \
-            --sysctl kernel.shmmni=524288 --sysctl kernel.shmall=8388608 \
+            --sysctl kernel.shmall=8388608 \
             --name HXE \
             store/saplabs/hanaexpress:$HXE_VERSION \
             --passwords-url file:///hana/mounts/passwords.json \
             --agree-to-sap-license
+
+#            --sysctl kernel.shmmni=524288 \
 
           sleep 10
 
