@@ -62,7 +62,7 @@ jobs:
       - name: Start Hana
         run: |
           mkdir ./HXE
-          HXE_VERSION=2.00.036.00.20190223.1
+          HXE_VERSION=2.00.054.00.20210603.1
           echo "{\"master_password\" : \"L1qu1base_test\"}" > ./HXE/passwords.json
           chmod 777 ./HXE/passwords.json
 
