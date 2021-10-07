@@ -99,5 +99,5 @@ jobs:
           docker ps -a
           docker exec HXE bash -l -c "hdbsql -u SYSTEM -p L1qu1base_test -i 90 -d HXE 'CREATE USER LIQUIBASE_TEST PASSWORD L1qu1base_test NO FORCE_FIRST_PASSWORD_CHANGE'
 
-          - name: Run Integration Tests
-            run: mvn -B verify
+      - name: Run Integration Tests
+        run: mvn -B verify
