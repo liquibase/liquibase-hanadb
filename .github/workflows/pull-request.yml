@@ -105,3 +105,10 @@ jobs:
 
       - name: Run Integration Tests
         run: mvn -B verify
+
+      - name: Archive Test Results
+        if: ${{ always() }}
+        uses: actions/upload-artifact@v2
+        with:
+          name: test-reports-jdk${{ matrix.java }}
+          path: ./**/target/failsafe-reports
