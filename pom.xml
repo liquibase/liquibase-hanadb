@@ -193,7 +193,7 @@
     					<artifactId>maven-javadoc-plugin</artifactId>
 					<configuration>
 						<author>false</author>
-        					<doctitle>Liquibase extension for SAPs HANA ${project.version}</doctitle>
+        					<doctitle>Liquibase ${project.version} extension for SAPs HANA</doctitle>
         					<quiet>true</quiet>
         					<doclint>none</doclint>
         					<encoding>UTF-8</encoding>
@@ -251,7 +251,7 @@
                         <artifactId>maven-javadoc-plugin</artifactId>
                         <configuration>
                             <author>false</author>
-                            <doctitle>Liquibase extension for SAPs HANA ${project.version}</doctitle>
+                            <doctitle>Liquibase ${project.version} extension for SAPs HANA</doctitle>
                             <quiet>true</quiet>
                             <doclint>none</doclint>
                             <encoding>UTF-8</encoding>
