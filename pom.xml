@@ -7,7 +7,7 @@
 	<version>4.10.1-SNAPSHOT</version>
 
 	<name>Liquibase HANA Database Integration</name>
-	<description>Liquibase extension for SAP's HANA database</description>
+	<description>Liquibase extension for SAPs HANA database</description>
 	<url>https://github.com/liquibase/liquibase-hanadb</url>
 
 	<organization>
@@ -193,7 +193,7 @@
     					<artifactId>maven-javadoc-plugin</artifactId>
 					<configuration>
 						<author>false</author>
-        					<doctitle>Liquibase CDI ${project.version} API</doctitle>
+        					<doctitle>Liquibase extension for SAPs HANA ${project.version}</doctitle>
         					<quiet>true</quiet>
         					<doclint>none</doclint>
         					<encoding>UTF-8</encoding>
@@ -251,7 +251,7 @@
                         <artifactId>maven-javadoc-plugin</artifactId>
                         <configuration>
                             <author>false</author>
-                            <doctitle>Liquibase CDI ${project.version} API</doctitle>
+                            <doctitle>Liquibase extension for SAPs HANA ${project.version}</doctitle>
                             <quiet>true</quiet>
                             <doclint>none</doclint>
                             <encoding>UTF-8</encoding>
