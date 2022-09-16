@@ -4,7 +4,7 @@
 
 	<groupId>org.liquibase.ext</groupId>
 	<artifactId>liquibase-hanadb</artifactId>
-	<version>4.16.1</version>
+	<version>4.16.2-SNAPSHOT</version>
 
 	<name>Liquibase HANA Database Integration</name>
 	<description>Liquibase extension for SAPs HANA database</description>
