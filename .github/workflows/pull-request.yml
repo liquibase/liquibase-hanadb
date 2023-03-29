@@ -49,7 +49,7 @@ jobs:
   integration-test:
     name: Integration Test
     runs-on: ubuntu-latest
-    needs: build
+    needs: unit-test
     steps:
       - uses: actions/checkout@v2
 
