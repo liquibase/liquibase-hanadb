@@ -120,10 +120,11 @@ jobs:
         run: |
           mkdir ./HXE
           chmod 777 ./HXE
+          HXE_VERSION=2.00.061.00.20220519.1
           echo "{\"master_password\" : \"L1qu1base_test\"}" > ./HXE/passwords.json
           chmod 777 ./HXE/passwords.json
 
-          docker pull saplabs/hanaexpress
+          docker pull saplabs/hanaexpress:$HXE_VERSION
 
           docker run -d \
             -p 39013:39013 \
@@ -138,7 +139,7 @@ jobs:
             --sysctl net.ipv4.ip_local_port_range='40000 60999' \
             --sysctl kernel.shmall=8388608 \
             --name HXE \
-            saplabs/hanaexpress \
+            saplabs/hanaexpress:$HXE_VERSION \
             --passwords-url file:///hana/mounts/passwords.json \
             --agree-to-sap-license
 
