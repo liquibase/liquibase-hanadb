@@ -120,11 +120,6 @@ jobs:
             **/target/**
             ~/.m2/repository/org/liquibase/
 
-      - name: Login to Hana Docker
-        uses: docker/login-action@v1
-        with:
-          username: ${{ secrets.DOCKER_HANADB_USERNAME }}
-          password: ${{ secrets.DOCKER_HANADB_PASSWORD }}
       - name: Start Hana
         run: |
           mkdir ./HXE
