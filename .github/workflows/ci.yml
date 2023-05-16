@@ -177,6 +177,9 @@ jobs:
   dependabot:
     name: Merge dependabot
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
     if: ${{ github.actor == 'dependabot[bot]' }}
 
     steps:
