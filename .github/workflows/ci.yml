@@ -177,6 +177,7 @@ jobs:
   dependabot:
     name: Merge dependabot
     runs-on: ubuntu-latest
+    needs: integration-test
     permissions:
       contents: write
       pull-requests: write
