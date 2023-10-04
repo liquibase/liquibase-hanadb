@@ -65,9 +65,10 @@ public class ResultSetExtractorHana extends SingleResultSetExtractor {
                 .customize(this.database);
 
         return executeAndExtract(
+                this.database,
                 createSql(((AbstractJdbcDatabase) this.database).getJdbcCatalogName(catalogAndSchema),
                         ((AbstractJdbcDatabase) this.database).getJdbcSchemaName(catalogAndSchema), this.tableName),
-                this.database, false);
+                false);
     }
 
     @Override
