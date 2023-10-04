@@ -4,6 +4,8 @@ import liquibase.database.Database;
 import liquibase.ext.hana.HanaDatabase;
 import liquibase.snapshot.SnapshotGenerator;
 import liquibase.snapshot.jvm.SequenceSnapshotGenerator;
+import liquibase.statement.SqlStatement;
+import liquibase.statement.core.RawSqlStatement;
 import liquibase.structure.DatabaseObject;
 import liquibase.structure.core.Schema;
 
@@ -24,13 +26,12 @@ public class SequenceSnapshotGeneratorHana extends SequenceSnapshotGenerator {
     }
 
     @Override
-    protected String getSelectSequenceSql(Schema schema, Database database) {
+    protected SqlStatement getSelectSequenceStatement(Schema schema, Database database) {
         if (database instanceof HanaDatabase) {
-            return "SELECT SEQUENCE_NAME FROM SYS.SEQUENCES WHERE SCHEMA_NAME='" + schema.getName() + "' AND LEFT(SEQUENCE_NAME, 5) != '_SYS_'";
+            return new RawSqlStatement("SELECT SEQUENCE_NAME FROM SYS.SEQUENCES WHERE SCHEMA_NAME='" + schema.getName() + "' AND LEFT(SEQUENCE_NAME, 5) != '_SYS_'");
         }
 
-        return super.getSelectSequenceSql(schema, database);
-
+        return super.getSelectSequenceStatement(schema, database);
     }
 
 }
