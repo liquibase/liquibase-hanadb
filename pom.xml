@@ -87,6 +87,25 @@
                     </dependency>
                   </dependencies>
             </plugin>
+            <plugin>
+                <artifactId>maven-failsafe-plugin</artifactId>
+                <version>${maven-failsafe-plugin.version}</version>
+                <configuration>
+                    <redirectTestOutputToFile>true</redirectTestOutputToFile>
+                    <reportFormat>plain</reportFormat>
+                    <systemPropertyVariables>
+                        <com.athaydes.spockframework.report.outputDir>${project.build.directory}/spock-reports</com.athaydes.spockframework.report.outputDir>
+                    </systemPropertyVariables>
+                </configuration>
+                <dependencies>
+                    <!-- Force using the latest JUnit 47 provider -->
+                    <dependency>
+                      <groupId>org.apache.maven.surefire</groupId>
+                      <artifactId>surefire-junit47</artifactId>
+                      <version>${maven-surefire-plugin.version}</version>
+                    </dependency>
+                  </dependencies>
+            </plugin>
         </plugins>
     </build>
 
