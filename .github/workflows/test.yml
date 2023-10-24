@@ -35,6 +35,9 @@ jobs:
             **/target/**
             ~/.m2/repository/org/liquibase/
 
+      - name: Build and Package
+        run: mvn -B dependency:go-offline clean package -DskipTests=true
+
       - name: Start Hana
         run: |
           mkdir ./HXE
