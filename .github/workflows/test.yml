@@ -34,7 +34,6 @@ jobs:
             **/target/**
             ~/.m2/repository/org/liquibase/
 
-
       - name: Install liquibase-core 0-SNAPSHOT
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
