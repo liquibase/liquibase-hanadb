@@ -13,6 +13,7 @@ jobs:
     uses: liquibase/build-logic/.github/workflows/os-extension-test.yml@v0.5.3
     secrets: inherit
 
+
   # integration-test:
   #   name: Integration Test
   #   runs-on: ubuntu-latest
@@ -129,4 +130,4 @@ jobs:
   #       uses: actions/upload-artifact@v2
   #       with:
   #         name: test-reports-integration
-          path: target/failsafe-reports
+  #        path: target/failsafe-reports
