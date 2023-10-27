@@ -116,10 +116,10 @@
             <plugin>
                 <groupId>org.liquibase.ext</groupId>
                 <artifactId>liquibase-sdk-maven-plugin</artifactId>
-                <version>0.10.20</version>
                 <configuration>
                     <githubToken>${env.GITHUB_TOKEN}</githubToken>
                 </configuration>
+                <version>0.10.21</version>
             </plugin>
         </plugins>
     </build>
