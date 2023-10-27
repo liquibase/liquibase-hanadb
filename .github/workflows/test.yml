@@ -1,0 +1,133 @@
+name: Build and Test
+
+on:
+  workflow_dispatch:
+  pull_request:
+    types:
+      - opened
+      - reopened
+      - synchronize
+
+jobs:
+  build:
+    uses: liquibase/build-logic/.github/workflows/os-extension-test.yml@v0.5.3
+    secrets: inherit
+
+
+  # integration-test:
+  #   name: Integration Test
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - uses: actions/checkout@v2
+
+  #     - name: Set up JDK 17
+  #       uses: actions/setup-java@v2
+  #       with:
+  #         java-version: 17
+  #         distribution: 'temurin'
+  #         cache: 'maven'
+            
+  #     # look for dependencies in maven
+  #     - name: maven-settings-xml-action
+  #       uses: whelk-io/maven-settings-xml-action@v21
+  #       with:
+  #         repositories: |
+  #           [
+  #             {
+  #               "id": "liquibase",
+  #               "url": "https://maven.pkg.github.com/liquibase/liquibase",
+  #               "releases": {
+  #                 "enabled": "true"
+  #               },
+  #               "snapshots": {
+  #                 "enabled": "true",
+  #                 "updatePolicy": "always"
+  #               }
+  #             },
+  #             {
+  #               "id": "liquibase-pro",
+  #               "url": "https://maven.pkg.github.com/liquibase/liquibase-pro",
+  #               "releases": {
+  #                 "enabled": "true"
+  #               },
+  #               "snapshots": {
+  #                 "enabled": "true",
+  #                 "updatePolicy": "always"
+  #               }
+  #             }
+  #           ]
+  #         servers: |
+  #           [
+  #             {
+  #               "id": "liquibase-pro",
+  #               "username": "liquibot",
+  #               "password": "${{ secrets.LIQUIBOT_PAT }}"
+  #             },
+  #             {
+  #               "id": "liquibase",
+  #               "username": "liquibot",
+  #               "password": "${{ secrets.LIQUIBOT_PAT }}"
+  #             }
+  #           ]
+
+  #     - name: Install liquibase-core 0-SNAPSHOT
+  #       env:
+  #         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  #       run: mvn -B clean liquibase-sdk:install-snapshot -Dliquibase.sdk.branchSearch=MATCHING_BRANCHES,master
+
+  #     - name: Build and Package
+  #       run: mvn -B dependency:go-offline clean package -DskipTests=true
+
+  #     - name: Start Hana
+  #       run: |
+  #         mkdir ./HXE
+  #         chmod 777 ./HXE
+  #         HXE_VERSION=2.00.061.00.20220519.1
+  #         echo "{\"master_password\" : \"L1qu1base_test\"}" > ./HXE/passwords.json
+  #         chmod 777 ./HXE/passwords.json
+
+  #         docker pull saplabs/hanaexpress:$HXE_VERSION
+
+  #         docker run -d \
+  #           -p 39013:39013 \
+  #           -p 39015:39015 \
+  #           -p 39017:39017 \
+  #           -p 39041-39045:39041-39045 \
+  #           -p 1128-1129:1128-1129 \
+  #           -p 59013-59014:59013-59014 \
+  #           -v $(pwd)/HXE:/hana/mounts \
+  #           --ulimit nofile=1048576:1048576 \
+  #           --sysctl kernel.shmmax=1073741824 \
+  #           --sysctl net.ipv4.ip_local_port_range='40000 60999' \
+  #           --sysctl kernel.shmall=8388608 \
+  #           --name HXE \
+  #           saplabs/hanaexpress:$HXE_VERSION \
+  #           --passwords-url file:///hana/mounts/passwords.json \
+  #           --agree-to-sap-license
+
+  #         sleep 10
+
+  #         timeout 500 sh -c '
+  #           while true; do
+  #             STARTING_CONTAINERS=`docker ps --filter "name=HXE" --format "{{.Names}} {{.Status}}" | grep "health: starting" | wc -l`;
+  #             echo "Waiting for $STARTING_CONTAINERS HANA container(s) to finish startup";
+  #             if [ $STARTING_CONTAINERS -ne 1 ]; then
+  #               break;
+  #             fi;
+  #             sleep 5;
+  #           done
+  #         '
+
+  #         docker ps -a
+  #         docker logs HXE
+  #         docker exec HXE bash -l -c "hdbsql -u SYSTEM -p L1qu1base_test -i 90 -d HXE 'CREATE USER LIQUIBASE_TEST PASSWORD L1qu1base_test NO FORCE_FIRST_PASSWORD_CHANGE'"
+
+  #     - name: Run Integration Tests
+  #       run: mvn -B verify
+
+  #     - name: Archive Test Results
+  #       if: ${{ always() }}
+  #       uses: actions/upload-artifact@v2
+  #       with:
+  #         name: test-reports-integration
+  #        path: target/failsafe-reports
