@@ -10,7 +10,7 @@ on:
 
 jobs:
   build:
-    uses: liquibase/build-logic/.github/workflows/os-extension-test.yml@v0.5.6
+    uses: liquibase/build-logic/.github/workflows/os-extension-test.yml@v0.5.7
     secrets: inherit
 
 
@@ -131,3 +131,8 @@ jobs:
   #       with:
   #         name: test-reports-integration
   #        path: target/failsafe-reports
+
+  dependabot-automerge:
+    needs: build
+    uses: liquibase/build-logic/.github/workflows/dependabot-automerge.yml@v0.5.7
+    secrets: inherit
