@@ -9,7 +9,7 @@ on:
       - synchronize
 
 jobs:
-  build:
+  build-test:
     uses: liquibase/build-logic/.github/workflows/os-extension-test.yml@v0.5.7
     secrets: inherit
 
@@ -133,6 +133,6 @@ jobs:
   #        path: target/failsafe-reports
 
   dependabot-automerge:
-    needs: build
+    needs: build-test
     uses: liquibase/build-logic/.github/workflows/dependabot-automerge.yml@v0.5.7
     secrets: inherit
