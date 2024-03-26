@@ -142,6 +142,11 @@ public class HanaDatabase extends AbstractJdbcDatabase {
     }
 
     @Override
+    public boolean failOnDefferable() {
+        return false;
+    }
+
+    @Override
     public boolean supportsSequences() {
         return true;
     }
