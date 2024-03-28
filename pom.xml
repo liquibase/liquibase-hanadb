@@ -47,7 +47,7 @@
     </developers>
 
     <properties>
-        <liquibase.version>4.26.0</liquibase.version>
+        <liquibase.version>4.27.0</liquibase.version>
     </properties>
 
     <scm>
