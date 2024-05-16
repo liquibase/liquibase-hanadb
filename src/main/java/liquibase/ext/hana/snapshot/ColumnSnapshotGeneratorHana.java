@@ -1,6 +1,7 @@
 package liquibase.ext.hana.snapshot;
 
 import liquibase.database.Database;
+import liquibase.ext.hana.HanaDatabase;
 import liquibase.snapshot.CachedRow;
 import liquibase.snapshot.SnapshotGenerator;
 import liquibase.snapshot.jvm.ColumnSnapshotGenerator;
@@ -12,7 +13,14 @@ public class ColumnSnapshotGeneratorHana extends ColumnSnapshotGenerator {
 
     @Override
     public int getPriority(Class<? extends DatabaseObject> objectType, Database database) {
-        return PRIORITY_DATABASE;
+        if (!(database instanceof HanaDatabase)) {
+            return PRIORITY_NONE;
+        }
+        int priority = super.getPriority(objectType, database);
+        if (priority > PRIORITY_NONE) {
+            priority += PRIORITY_DATABASE;
+        }
+        return priority;
     }
 
     @Override
