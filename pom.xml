@@ -118,7 +118,7 @@
                 <configuration>
                     <githubToken>${env.GITHUB_TOKEN}</githubToken>
                 </configuration>
-                <version>0.10.23</version>
+                <version>0.10.25</version>
             </plugin>
         </plugins>
     </build>
