@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>org.liquibase</groupId>
+        <artifactId>liquibase-parent-pom</artifactId>
+        <version>0.5.8</version> <!-- Replace with the desired version -->
+    </parent>
+
+    <groupId>org.liquibase.ext</groupId>
+    <artifactId>liquibase-hanadb</artifactId>
+    <version>4.32.0-SNAPSHOT</version>
+
+    <name>Liquibase Extension SAP HANA support</name>
+    <description>Add this Liquibase extension to your project to support SAP HANA</description>
+    <url>https://github.com/liquibase/liquibase-hanadb</url>
+
+    <developers>
+        <developer>
+            <id>liquibase</id>
+            <name>Liquibase Community</name>
+            <email>community@liquibase.com</email>
+            <roles>
+                <role>architect</role>
+                <role>developer</role>
+            </roles>
+            <timezone>-6</timezone>
+        </developer>
+    		<developer>
+            <id>breglerj</id>
+            <name>Jonathan Bregler</name>
+            <email>jonathan.bregler@sap.com</email>
+            <organization>SAP</organization>
+            <organizationUrl>http://www.sap.com/</organizationUrl>
+    		</developer>
+        <developer>
+            <id>nvoxland</id>
+            <name>Nathan Voxland</name>
+            <email>nathan.voxland@liquibase.org</email>
+            <roles>
+                <role>architect</role>
+                <role>developer</role>
+            </roles>
+            <timezone>-6</timezone>
+        </developer>
+    </developers>
+
+    <properties>
+        <liquibase.version>4.32.0</liquibase.version>
+    </properties>
+
+    <scm>
+        <connection>scm:git:${project.scm.url}</connection>
+        <developerConnection>scm:git:${project.scm.url}</developerConnection>
+		<url>https://github.com/liquibase/liquibase-hanadb.git</url>
+		<tag>HEAD</tag>
+	</scm>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.liquibase</groupId>
+            <artifactId>liquibase-test-harness</artifactId>
+            <version>1.0.11</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.sap.cloud.db.jdbc</groupId>
+            <artifactId>ngdbc</artifactId>
+            <version>2.24.7</version>
+            <scope>test</scope>
+		</dependency>       
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>${maven-surefire-plugin.version}</version>
+                <configuration>
+                    <redirectTestOutputToFile>true</redirectTestOutputToFile>
+                    <reportFormat>plain</reportFormat>
+                    <systemPropertyVariables>
+                        <com.athaydes.spockframework.report.outputDir>${project.build.directory}/spock-reports</com.athaydes.spockframework.report.outputDir>
+                    </systemPropertyVariables>
+                </configuration>
+                <dependencies>
+                    <!-- Force using the latest JUnit 47 provider -->
+                    <dependency>
+                      <groupId>org.apache.maven.surefire</groupId>
+                      <artifactId>surefire-junit47</artifactId>
+                      <version>${maven-surefire-plugin.version}</version>
+                    </dependency>
+                  </dependencies>
+            </plugin>
+            <plugin>
+                <artifactId>maven-failsafe-plugin</artifactId>
+                <version>${maven-failsafe-plugin.version}</version>
+                <configuration>
+                    <redirectTestOutputToFile>true</redirectTestOutputToFile>
+                    <reportFormat>plain</reportFormat>
+                    <systemPropertyVariables>
+                        <com.athaydes.spockframework.report.outputDir>${project.build.directory}/spock-reports</com.athaydes.spockframework.report.outputDir>
+                    </systemPropertyVariables>
+                </configuration>
+                <dependencies>
+                    <!-- Force using the latest JUnit 47 provider -->
+                    <dependency>
+                      <groupId>org.apache.maven.surefire</groupId>
+                      <artifactId>surefire-junit47</artifactId>
+                      <version>${maven-surefire-plugin.version}</version>
+                    </dependency>
+                  </dependencies>
+            </plugin>
+            <plugin>
+                <groupId>org.liquibase.ext</groupId>
+                <artifactId>liquibase-sdk-maven-plugin</artifactId>
+                <configuration>
+                    <githubToken>${env.GITHUB_TOKEN}</githubToken>
+                </configuration>
+                <version>0.10.25</version>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>
