@@ -13,11 +13,12 @@ public class SequenceSnapshotGeneratorHana extends SequenceSnapshotGenerator {
 
     @Override
     public int getPriority(Class<? extends DatabaseObject> objectType, Database database) {
-        int priority = super.getPriority(objectType, database);
         if (database instanceof HanaDatabase) {
-            priority += PRIORITY_DATABASE;
+            int priority = super.getPriority(objectType, database);
+            return priority + PRIORITY_DATABASE;
+        } else {
+            return PRIORITY_NONE;
         }
-        return priority;
     }
 
     @Override
