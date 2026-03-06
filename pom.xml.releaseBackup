@@ -10,7 +10,7 @@
 
     <groupId>org.liquibase.ext</groupId>
     <artifactId>liquibase-hanadb</artifactId>
-    <version>5.0.1-SNAPSHOT</version>
+    <version>5.0.2-SNAPSHOT</version>
 
     <name>Liquibase Extension SAP HANA support</name>
     <description>Add this Liquibase extension to your project to support SAP HANA</description>
@@ -47,7 +47,7 @@
     </developers>
 
     <properties>
-        <liquibase.version>5.0.1</liquibase.version>
+        <liquibase.version>5.0.2</liquibase.version>
     </properties>
 
     <scm>
@@ -67,7 +67,7 @@
         <dependency>
             <groupId>com.sap.cloud.db.jdbc</groupId>
             <artifactId>ngdbc</artifactId>
-            <version>2.26.6</version>
+            <version>2.27.7</version>
             <scope>test</scope>
 		</dependency>       
     </dependencies>
@@ -118,7 +118,7 @@
                 <configuration>
                     <githubToken>${env.GITHUB_TOKEN}</githubToken>
                 </configuration>
-                <version>0.10.25</version>
+                <version>0.11.0</version>
             </plugin>
         </plugins>
     </build>
